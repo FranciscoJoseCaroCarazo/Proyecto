@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 //se importa modelo e interfaz
 import modelo.modelo;
 import vista.Equipos;
@@ -98,7 +100,7 @@ public class controladorEquipos implements ActionListener,MouseListener{
             case aniadirEquipo:
                if (this.modelo.Jnuevoequipo(
                     this.vista.txtNombre.getText() ,
-                    this.vista.txtAnio.getText(),
+                    Integer.parseInt(this.vista.txtAnio.getText()),
                     this.vista.txtEstadio.getText() ));
                 this.vista.tablaEquipo.setModel( this.modelo.getEquipos() );
                 JOptionPane.showMessageDialog(vista,"Exito: Nuevo Equipo añadido.");

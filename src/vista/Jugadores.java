@@ -38,7 +38,7 @@ public class Jugadores extends javax.swing.JFrame {
         txtNifichaje = new javax.swing.JTextField();
         txtNombrefichaje = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtTemporada = new javax.swing.JTextField();
+        txtTemporada = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaJugadores = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -51,10 +51,10 @@ public class Jugadores extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtNacionalidad = new javax.swing.JTextField();
-        txtAnio = new javax.swing.JTextField();
+        txtAnio = new javax.swing.JFormattedTextField();
         verJugadores = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Panel de Control de los Jugadores");
@@ -95,11 +95,8 @@ public class Jugadores extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel4.setText("Temporada");
 
-        txtTemporada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTemporadaActionPerformed(evt);
-            }
-        });
+        txtTemporada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
+        txtTemporada.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -111,16 +108,15 @@ public class Jugadores extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(141, 141, 141)
-                        .addComponent(jLabel4)
-                        .addGap(0, 54, Short.MAX_VALUE))
+                        .addComponent(jLabel4))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3)
                             .addComponent(txtNombrefichaje, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                             .addComponent(txtNifichaje))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTemporada)))
-                .addContainerGap())
+                        .addComponent(txtTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +149,7 @@ public class Jugadores extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaJugadores);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nuevo Fichaje", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nuevo Jugador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel5.setText("Nif");
@@ -182,6 +178,8 @@ public class Jugadores extends javax.swing.JFrame {
             }
         });
 
+        txtAnio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -204,12 +202,14 @@ public class Jugadores extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
-                        .addGap(17, 17, 17)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE))
-                            .addComponent(txtAnio))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtAnio)))))
                 .addGap(50, 50, 50))
         );
         jPanel3Layout.setVerticalGroup(
@@ -233,8 +233,8 @@ public class Jugadores extends javax.swing.JFrame {
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
 
@@ -262,14 +262,14 @@ public class Jugadores extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(verJugadores))
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nuevoFichaje)
                                 .addGap(18, 18, 18)
-                                .addComponent(volver, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(volver, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 171, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(271, Short.MAX_VALUE)
@@ -312,10 +312,6 @@ public class Jugadores extends javax.swing.JFrame {
     private void txtNombrefichajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombrefichajeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombrefichajeActionPerformed
-
-    private void txtTemporadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTemporadaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTemporadaActionPerformed
 
     private void txtNifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNifActionPerformed
         // TODO add your handling code here:
@@ -382,14 +378,14 @@ public class Jugadores extends javax.swing.JFrame {
     public javax.swing.JButton modJugador;
     public javax.swing.JButton nuevoFichaje;
     public javax.swing.JTable tablaJugadores;
-    public javax.swing.JTextField txtAnio;
+    public javax.swing.JFormattedTextField txtAnio;
     public javax.swing.JTextField txtApellido;
     public javax.swing.JTextField txtNacionalidad;
     public javax.swing.JTextField txtNif;
     public javax.swing.JTextField txtNifichaje;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtNombrefichaje;
-    public javax.swing.JTextField txtTemporada;
+    public javax.swing.JFormattedTextField txtTemporada;
     public javax.swing.JButton verJugadores;
     public javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables

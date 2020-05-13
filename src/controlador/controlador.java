@@ -108,7 +108,7 @@ public class controlador implements ActionListener,MouseListener{
                 this.vista.tablaBusquedas.setModel( this.modelo.getEquipos() );    
                 break;
             case mostrarJugadoresde:
-                
+                this.vista.tablaBusquedas.setModel( this.modelo.getJugadoresDe(this.vista.buscarJugadoresde.getText()));
                 break;
             case mostrarEquipode:
                 
