@@ -1,5 +1,6 @@
 package modelo;
 import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  * @web http://www.jc-mouse.net
@@ -10,7 +11,10 @@ public class modelo extends database{
     /** Constructor de clase */
     public modelo (){}
 
-    /** Obtiene registros de la tabla PRODUCTO y los devuelve en un DefaultTableModel*/
+    /**
+     * Metodo que devuelve todos los jugadores
+     * @return 
+     */
     public DefaultTableModel getJugadores()
     {
       DefaultTableModel tablemodel = new DefaultTableModel();
@@ -51,6 +55,10 @@ public class modelo extends database{
         return tablemodel;
     }
     
+    /**
+     * Método que devuelve todos los equipos
+     * @return 
+     */
     public DefaultTableModel getEquipos()
     {
       DefaultTableModel tablemodel = new DefaultTableModel();
@@ -90,42 +98,62 @@ public class modelo extends database{
     }
     
      
-    /** Registra un nuevo producto */
-
-    public boolean Janiadirjugador(String id, String nombre , String apellido, String nacionalidad, int fecha)
-    {
-            //Se arma la consulta
-            String q=" INSERT INTO Jugadores ( nif , nombre , apellidos, nacionalidad , anio_nacimiento  ) "
-                    + "VALUES ( '" + id + "','" + nombre + "','" + apellido + "','"+ nacionalidad +"','" + fecha + "' )";
-            //se ejecuta la consulta
-            try {
-                PreparedStatement pstm = this.getConexion().prepareStatement(q);
-                pstm.execute();
-                pstm.close();
-                return true;
-            }catch(SQLException e){
-                System.err.println( e.getMessage() );
-            }
-            return false;
+    
+    /**
+     * Método que nos permite Añadir Jugadores a la base de datos
+     * @param id
+     * @param nombre
+     * @param apellido
+     * @param nacionalidad
+     * @param fecha
+     * @return 
+     */
+    public boolean Janiadirjugador(String id, String nombre , String apellido, String nacionalidad, int fecha){
+        //Se arma la consulta
+        String q=" INSERT INTO Jugadores ( nif , nombre , apellidos, nacionalidad , anio_nacimiento  ) "
+                + "VALUES ( '" + id + "','" + nombre + "','" + apellido + "','"+ nacionalidad +"','" + fecha + "' )";
+        //se ejecuta la consulta
+        try {
+            PreparedStatement pstm = this.getConexion().prepareStatement(q);
+            pstm.execute();
+            pstm.close();
+            return true;
+        }catch(SQLException e){
+            System.err.println( e.getMessage() );
+        }
+        return false;   
         }
     
-    public boolean Jnuevofichaje(String id, String nombre , String temporada)
-    {
-            //Se arma la consulta
-            String q=" INSERT INTO Fichajes ( nif , nombre , temporada) "
-                    + "VALUES ( '" + id + "','" + nombre + "','" + temporada + "' )";
-            //se ejecuta la consulta
-            try {
-                PreparedStatement pstm = this.getConexion().prepareStatement(q);
-                pstm.execute();
-                pstm.close();
-                return true;
-            }catch(SQLException e){
-                System.err.println( e.getMessage() );
-            }
-            return false;
+    /**
+     * Método que nos permite Crear nuevo Fichajes
+     * @param id
+     * @param nombre
+     * @param temporada
+     * @return 
+     */
+    public boolean Jnuevofichaje(String id, String nombre , String temporada){
+        //Se arma la consulta
+        String q=" INSERT INTO Fichajes ( nif , nombre , temporada) "
+                + "VALUES ( '" + id + "','" + nombre + "','" + temporada + "' )";
+        //se ejecuta la consulta
+        try {
+            PreparedStatement pstm = this.getConexion().prepareStatement(q);
+            pstm.execute();
+            pstm.close();
+            return true;
+        }catch(SQLException e){
+            System.err.println( e.getMessage() );
         }
+        return false;
+    }
     
+    /**
+     * Método que nos permite introducir un nuevo equipo a la base de datos
+     * @param nombre
+     * @param anio
+     * @param estadio
+     * @return 
+     */
     public boolean Jnuevoequipo(String nombre, int anio , String estadio)
     {
             //Se arma la consulta
@@ -143,6 +171,15 @@ public class modelo extends database{
             return false;
         }
     
+    /**
+     * Método que nos permite modificar un jugador que ya se encuantra en la base de datos
+     * @param id
+     * @param nombre
+     * @param apellido
+     * @param nacionalidad
+     * @param fecha
+     * @return 
+     */
     public boolean Jmodjugador(String id, String nombre , String apellido, String nacionalidad, String fecha)
     {
             //Se arma la consulta
@@ -159,8 +196,15 @@ public class modelo extends database{
             return false;
         }
     
-    public boolean Jmodequipo(String nombre, String anio , String estadio)
-    {
+    /**
+     * Método que nos permite mdificar un equipo que ya esta en la base de datos
+     * @param nombre
+     * @param anio
+     * @param estadio
+     * @return 
+     */
+    public boolean Jmodequipo(String nombre, String anio , String estadio){
+        
             //Se arma la consulta
             String q="UPDATE Equipos SET  nombre = '" +nombre+ "' , anio_creacion = '" +anio+ "' , Nombre_estadio = '" +estadio+ "' WHERE nombre = '"+nombre+"'";
             //se ejecuta la consulta
@@ -175,6 +219,13 @@ public class modelo extends database{
             return false;
         }
     
+    /**
+     * Método que permite obtener una busqueda que consiste en saber los jugadores que conforman un equipo,
+     * mediante la utilizacion de un procedimiento almecenado en la base de datos que recoje el nombre del 
+     * equipo del que queremos saber lo jugadores y mostrarla en una tabla.
+     * @param equipo
+     * @return 
+     */
     public DefaultTableModel getJugadoresDe(String equipo)
     {
       DefaultTableModel tablemodel = new DefaultTableModel();
@@ -216,6 +267,13 @@ public class modelo extends database{
         return tablemodel;
     }
     
+    /**
+     * Método que permite obtener una busqueda que consiste en saber los equipos en los que ha estado un jugador,
+     * mediante la utilizacion de un procedimiento almecenado en la base de datos que recoje el nif del jugador 
+     * del que queremos saber los equipos en los que ha estado y mostrarlos en una tabla.
+     * @param nif
+     * @return 
+     */
     public DefaultTableModel getEquipoDe(String nif)
     {
       DefaultTableModel tablemodel = new DefaultTableModel();
@@ -257,5 +315,5 @@ public class modelo extends database{
         }
         return tablemodel;
     }
-
+   
 }

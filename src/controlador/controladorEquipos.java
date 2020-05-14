@@ -98,7 +98,8 @@ public class controladorEquipos implements ActionListener,MouseListener{
     switch ( AccionMVC.valueOf( e.getActionCommand() ) )
         {
             case aniadirEquipo:
-               if (this.modelo.Jnuevoequipo(
+               if (!validardatosEquipos()){
+                   if (this.modelo.Jnuevoequipo(
                     this.vista.txtNombre.getText() ,
                     Integer.parseInt(this.vista.txtAnio.getText()),
                     this.vista.txtEstadio.getText() ));
@@ -107,6 +108,7 @@ public class controladorEquipos implements ActionListener,MouseListener{
                 this.vista.txtNombre.setText("");
                 this.vista.txtAnio.setText("") ;
                 this.vista.txtEstadio.setText("");
+               } 
                 break;
             case modEquipo:
                 if (this.modelo.Jmodequipo(
@@ -127,5 +129,11 @@ public class controladorEquipos implements ActionListener,MouseListener{
                 break;
                   
         }
+    }
+    
+    public boolean validardatosEquipos(){
+        return this.vista.txtNombre.getText().length() == 0  ||
+                this.vista.txtAnio.getText().length() == 0  ||
+                this.vista.txtEstadio.getText().length() == 0;        
     }
 }

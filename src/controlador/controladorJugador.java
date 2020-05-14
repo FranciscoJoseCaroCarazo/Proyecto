@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 //se importa modelo e interfaz
 import modelo.modelo;
 import vista.Jugadores;
-import vista.interfaz;
+
 /**
  * @author Mouse
  */
@@ -101,7 +101,8 @@ public class controladorJugador implements ActionListener,MouseListener{
     switch ( AccionMVC.valueOf( e.getActionCommand() ) )
         {
             case aniadirJugador:
-               if (this.modelo.Janiadirjugador(
+               if (!validardatosJugadores()){
+                   if (this.modelo.Janiadirjugador(
                     this.vista.txtNif.getText() ,
                     this.vista.txtNombre.getText(),
                     this.vista.txtApellido.getText(),
@@ -114,6 +115,7 @@ public class controladorJugador implements ActionListener,MouseListener{
                 this.vista.txtApellido.setText("");
                 this.vista.txtNacionalidad.setText("") ;
                 this.vista.txtAnio.setText("") ;
+               }
                 break;
             case modJugador:
                if (this.modelo.Jmodjugador(
@@ -144,9 +146,20 @@ public class controladorJugador implements ActionListener,MouseListener{
                 break;
             case volver:
                  this.vista.dispose();
-                
                 break;
                   
         }
+    
+    
     }
+    
+    public boolean validardatosJugadores(){
+        return this.vista.txtNif.getText().length() == 0  ||
+                this.vista.txtNombre.getText().length() == 0  ||
+                this.vista.txtApellido.getText().length() == 0  ||
+                this.vista.txtNacionalidad.getText().length() == 0  ||
+                this.vista.txtAnio.getText().length() == 0;
+    }
+    
+    
 }
