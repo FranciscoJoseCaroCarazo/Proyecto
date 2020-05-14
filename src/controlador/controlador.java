@@ -80,7 +80,16 @@ public class controlador implements ActionListener,MouseListener{
     }
 
     //Eventos que suceden por el mouse
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+        if( e.getButton()== 1)//boton izquierdo
+        {
+             int fila = this.vista.tablaBusquedas.rowAtPoint(e.getPoint());
+             if (fila > -1){                
+                this.vista.buscarEquipode.setText( String.valueOf( this.vista.tablaBusquedas.getValueAt(fila, 0) ));
+                
+             }
+        }   
+    }
 
     public void mousePressed(MouseEvent e) {}
 
@@ -109,9 +118,11 @@ public class controlador implements ActionListener,MouseListener{
                 break;
             case mostrarJugadoresde:
                 this.vista.tablaBusquedas.setModel( this.modelo.getJugadoresDe(this.vista.buscarJugadoresde.getText()));
+                this.vista.buscarJugadoresde.setText("");
                 break;
             case mostrarEquipode:
-                
+                this.vista.tablaBusquedas.setModel( this.modelo.getEquipoDe(this.vista.buscarEquipode.getText()));
+                this.vista.buscarEquipode.setText("");
                 break;    
             case botonSalir:
                 this.vista.dispose();

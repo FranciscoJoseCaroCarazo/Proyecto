@@ -215,5 +215,47 @@ public class modelo extends database{
         }
         return tablemodel;
     }
+    
+    public DefaultTableModel getEquipoDe(String nif)
+    {
+      DefaultTableModel tablemodel = new DefaultTableModel();
+      int registros = 0;
+      String[] columNames = {"NIF","Nombre","Apellidos","Nombre Equipo","Temporada","Estadio"};
+      //obtenemos la cantidad de registros existentes en la tabla y se almacena en la variable "registros"
+      //para formar la matriz de datos
+      try{
+         PreparedStatement pstm = this.getConexion().prepareStatement( "SELECT count(*) as total FROM Jugadores");
+         ResultSet res = pstm.executeQuery();
+         res.next();
+         registros = res.getInt("total");
+         res.close();
+      }catch(SQLException e){
+         System.err.println( e.getMessage() );
+      }
+    //se crea una matriz con tantas filas y columnas que necesite
+    Object[][] data = new String[registros][6];
+      try{
+          //realizamos la consulta sql y llenamos los datos en la matriz "Object[][] data"
+         CallableStatement castm = this.getConexion().prepareCall("{call EquiposDe(?)}");
+         castm.setString(1, nif);
+         ResultSet res = castm.executeQuery();
+         int i=0;
+         while(res.next()){
+                data[i][0] = res.getString( "Fichajes.nif" );
+                data[i][1] = res.getString( "Jugadores.nombre" );
+                data[i][2] = res.getString( "Jugadores.apellidos" );
+                data[i][3] = res.getString( "Fichajes.nombre" );
+                data[i][4] = res.getString( "fichajes.temporada" );
+                data[i][5] = res.getString( "Equipos.Nombre_estadio" );
+            i++;
+         }
+         res.close();
+         //se añade la matriz de datos en el DefaultTableModel
+         tablemodel.setDataVector(data, columNames );
+         }catch(SQLException e){
+            System.err.println( e.getMessage() );
+        }
+        return tablemodel;
+    }
 
 }
